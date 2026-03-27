@@ -19,6 +19,16 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
 
+    public User() {
+        // Default constructor required by JPA
+    }
+
+    public User(final int id, final String firstName, final String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + '}';
