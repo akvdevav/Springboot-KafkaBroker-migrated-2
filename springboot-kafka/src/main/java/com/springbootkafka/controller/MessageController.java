@@ -5,23 +5,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.springbootkafka.kafka.KafkaProducer;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 @RestController
 @RequestMapping("/api/v1/kafka")
 public class MessageController {
 
-    public MessageController(final KafkaProducer kafkaProducer) {
-        this.kafkaProducer = kafkaProducer;
-    }
+    private final RabbitTemplate rabbitTemplate;
 
-    private KafkaProducer kafkaProducer;
+    public MessageController(final RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     @GetMapping("/publish")
     public ResponseEntity<String> publishMessage(@RequestParam("message") String message){
-        kafkaProducer.sendMessage(message);
-        return ResponseEntity.ok("Message sent to the topic");
+        rabbitTemplate.convertAndSend("myQueue", message);
+        return ResponseEntity.ok("Message sent to the queue");
     }
 
 }
