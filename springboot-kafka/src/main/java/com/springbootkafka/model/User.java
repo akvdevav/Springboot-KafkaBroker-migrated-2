@@ -57,4 +57,29 @@ public class User implements Serializable {
     public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
+
+    // Additional accessor methods expected by other classes
+    public int getUserId() {
+        return this.id;
+    }
+
+    public void setUserId(final int id) {
+        this.id = id;
+    }
+
+    public String getUserFirstName() {
+        return this.firstName;
+    }
+
+    public void setUserFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getUserLastName() {
+        return this.lastName;
+    }
+
+    public void setUserLastName(final String lastName) {
+        this.lastName = lastName;
+    }
 }
